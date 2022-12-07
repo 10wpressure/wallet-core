@@ -1,9 +1,10 @@
-FROM ubuntu:22.04
+FROM --platform=linux/amd64 ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install some basics
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y \
         wget \
         curl \
@@ -20,7 +21,7 @@ RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc | apt-key 
     && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
 
 
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb && dpkg -i ./libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb && dpkg -i ./libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
 # Install required packages for dev
 RUN apt-get update \
     && apt-get install -y \
@@ -49,9 +50,9 @@ WORKDIR /wallet-core
 RUN tools/install-dependencies
 
 # Build: generate, cmake, and make lib
-RUN tools/generate-files \
-    && cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug \
-    && make -Cbuild -j12 TrustWalletCore
+RUN tools/generate-files
+RUN cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug
+RUN make -Cbuild -j12 TrustWalletCore
 
 # Build unit tester
 RUN make -Cbuild -j12 tests

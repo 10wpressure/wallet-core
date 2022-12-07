@@ -56,6 +56,7 @@
 #include "Zcash/Entry.h"
 #include "Zilliqa/Entry.h"
 #include "Hedera/Entry.h"
+#include "Westend/Entry.h" // TODO remove if the blockchain already exists, or just remove this comment if not
 // end_of_coin_includes_marker_do_not_modify
 
 using namespace TW;
@@ -105,6 +106,7 @@ Zilliqa::Entry zilliqaDP;
 Nervos::Entry NervosDP;
 Everscale::Entry EverscaleDP;
 Hedera::Entry HederaDP;
+Westend::Entry WestendDP; // TODO remove if the blockchain already exists, or just remove this comment if not
 // end_of_coin_dipatcher_declarations_marker_do_not_modify
 
 CoinEntry* coinDispatcher(TWCoinType coinType) {
@@ -156,6 +158,7 @@ CoinEntry* coinDispatcher(TWCoinType coinType) {
         case TWBlockchainEverscale: entry = &EverscaleDP; break;
         case TWBlockchainAptos: entry = &AptosDP; break;
         case TWBlockchainHedera: entry = &HederaDP; break;
+        case TWBlockchainWestend: entry = &WestendDP; break; // TODO remove if the blockchain already exists, or just remove this comment if not
         // end_of_coin_dipatcher_switch_marker_do_not_modify
 
         default: entry = nullptr; break;

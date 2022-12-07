@@ -28,7 +28,7 @@ RUN apt-get update \
         clang-10 \
         llvm-10 \
         libc++-dev libc++abi-dev \
-        cmake \        
+        cmake \
         libboost1.74-dev \
         ccache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ `uname` == "Darwin" ]]; then
+if [[ $(uname) == "Darwin" ]]; then
   rustup update
   rustup toolchain install nightly
   rustup default nightly

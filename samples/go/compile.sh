@@ -23,5 +23,6 @@ for FILE in "$PROTO_PATH"/*.proto; do
     --go_opt=MBitcoin.proto=tw/protos/bitcoin \
     --go_opt=MEthereum.proto=tw/protos/ethereum \
     --go_opt=MBinance.proto=tw/protos/binance \
+    --go_opt=MPolkadot.proto=tw/protos/polkadot \
     "$PROTO_PATH"/"$FILE_NAME"
 done
