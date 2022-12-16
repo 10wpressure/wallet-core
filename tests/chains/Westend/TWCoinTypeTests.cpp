@@ -23,13 +23,15 @@ TEST(TWWestendCoinType, TWCoinType) {
     const auto accId = WRAPS(TWStringCreateWithUTF8Bytes("5EufDnKtpwUNdamQqT76HUBEd3Lw1Jqrs1qdDggQ85FmMKou"));
     const auto accUrl = WRAPS(TWCoinTypeConfigurationGetAccountURL(coin, accId.get()));
 
+    ASSERT_EQ(TWCoinTypeConfigurationGetDecimals(coin), 12);
+    ASSERT_EQ(TWBlockchainWestend, TWCoinTypeBlockchain(coin));
+    ASSERT_EQ(0x0, TWCoinTypeP2shPrefix(coin));
+    ASSERT_EQ(0x0, TWCoinTypeStaticPrefix(coin));
     assertStringsEqual(id, "westend");
     assertStringsEqual(name, "Westend");
     assertStringsEqual(symbol, "WND");
-    ASSERT_EQ(TWCoinTypeConfigurationGetDecimals(coin), 12);
-    ASSERT_EQ(TWCoinTypeBlockchain(coin), TWBlockchainWestend);
-    ASSERT_EQ(TWCoinTypeP2shPrefix(coin), 0x0);
-    ASSERT_EQ(TWCoinTypeStaticPrefix(coin), 0x0);
     assertStringsEqual(txUrl, "https://westend.subscan.io/extrinsic/0x970819ba6853c30700ef58782ed51758ab686c360d937c80b1e71b27d8683fcf");
     assertStringsEqual(accUrl, "https://westend.subscan.io/account/5EufDnKtpwUNdamQqT76HUBEd3Lw1Jqrs1qdDggQ85FmMKou");
+    assertStringsEqual(id, "westend");
+    assertStringsEqual(name, "Westend");
 }

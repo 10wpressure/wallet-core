@@ -14,11 +14,11 @@ namespace TW::Westend {
 /// Note: do not put the implementation here (no matter how simple), to avoid having coin-specific includes in this file
 class Entry final : public CoinEntry {
 public:
-    virtual bool validateAddress(TWCoinType coin, const std::string& address, TW::byte p2pkh, const PrefixVariant& addressPrefix) const;
-    virtual std::string deriveAddress(TWCoinType coin, const PublicKey& publicKey, TW::byte p2pkh, const char* hrp) const;
-    virtual void sign(TWCoinType coin, const Data& dataIn, Data& dataOut) const;
-    // normalizeAddress(): implement this if needed, e.g. Ethereum address is EIP55 checksummed
-    // plan(): implement this if the blockchain is UTXO based
+    bool validateAddress(TWCoinType coin, const std::string& address, const PrefixVariant& addressPrefix) const;
+    std::string deriveAddress(TWCoinType coin, const PublicKey& publicKey, TW::byte p2pkh, const char* hrp) const;
+    std::string deriveAddress(TWCoinType coin, const PublicKey& publicKey, TWDerivation derivation, const PrefixVariant& addressPrefix) const;
+    Data addressToData(TWCoinType coin, const std::string& address) const;
+    void sign(TWCoinType coin, const Data& dataIn, Data& dataOut) const;
 };
 
 } // namespace TW::Westend

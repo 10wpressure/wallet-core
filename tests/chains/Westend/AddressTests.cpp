@@ -14,36 +14,42 @@
 namespace TW::Westend::tests {
 
 TEST(WestendAddress, Valid) {
-    ASSERT_TRUE(Address::isValid("__ADD_VALID_ADDRESS_HERE__"));
+    // Substrate ed25519
+    ASSERT_FALSE(Address::isValid("5FqqU2rytGPhcwQosKRtW1E3ha6BJKAjHgtcodh71dSyXhoZ"));
+    // Polkadot ed25519
+    ASSERT_FALSE(Address::isValid("15AeCjMpcSt3Fwa47jJBd7JzQ395Kr2cuyF5Zp4UBf1g9ony"));
+    // Polkadot sr25519
+    ASSERT_FALSE(Address::isValid("15AeCjMpcSt3Fwa47jJBd7JzQ395Kr2cuyF5Zp4UBf1g9ony"));
+    // Bitcoin
+    ASSERT_FALSE(Address::isValid("1ES14c7qLb5CYhLMUekctxLgc1FV2Ti9DA"));
+    // Kusama ed25519
+    ASSERT_FALSE(Address::isValid("FHKAe66mnbk8ke8zVWE9hFVFrJN1mprFPVmD5rrevotkcDZ"));
+    // Kusama secp256k1
+    ASSERT_FALSE(Address::isValid("FxQFyTorsjVsjjMyjdgq8w5vGx8LiA1qhWbRYcFijxKKchx"));
+    // Kusama sr25519
+    ASSERT_FALSE(Address::isValid("EJ5UJ12GShfh7EWrcNZFLiYU79oogdtXFUuDDZzk7Wb2vCe"));
 
-    // TODO: Add more tests
-}
-
-TEST(WestendAddress, Invalid) {
-    ASSERT_FALSE(Address::isValid("__ADD_INVALID_ADDRESS_HERE__"));
-
-    // TODO: Add more tests
+    // Westend sr25519
+    ASSERT_TRUE(Address::isValid("5FbtAUg6dhHWj5YbpbLFJBYgPJG3ekJghksvgskBNC7s3Yfv"));
+    // Westend sr25519
+    ASSERT_TRUE(Address::isValid("5DXm3vjyFAVVCkdgppsBAsn2AtqbHcxeTfYFGwibht1Aw97p"));
 }
 
 TEST(WestendAddress, FromPrivateKey) {
-    // TODO: Check public key type, finalize implementation
-
-    auto privateKey = PrivateKey(parse_hex("__PRIVATE_KEY_DATA__"));
+    auto privateKey = PrivateKey(parse_hex("0xe8133c8d3d143ebb3eaa90fdc20f29ffeb91215a5f8a6a5ee9596a4e0d0fab1a"));
     auto address = Address(privateKey.getPublicKey(TWPublicKeyTypeED25519));
-    ASSERT_EQ(address.string(), "__ADD_RESULTING_ADDRESS_HERE__");
+    ASSERT_EQ(address.string(), "5H5qKsYuPQPw7s56fa6pbrgpNPKGucX8fkmQdAprouAZqtgz");
 }
 
 TEST(WestendAddress, FromPublicKey) {
-    // TODO: Check public key type, finalize implementation
-    
-    auto publicKey = PublicKey(parse_hex("__PUBLIC_KEY_DATA__"), TWPublicKeyTypeED25519);
+    auto publicKey = PublicKey(parse_hex("0xde098e3fa1225fd434c373de74051c7286a22cb16a6f4ea8dcc8257b3ce9eac0"), TWPublicKeyTypeED25519);
     auto address = Address(publicKey);
-    ASSERT_EQ(address.string(), "__ADD_RESULTING_ADDRESS_HERE__");
+    ASSERT_EQ(address.string(), "5H5qKsYuPQPw7s56fa6pbrgpNPKGucX8fkmQdAprouAZqtgz");
 }
 
 TEST(WestendAddress, FromString) {
-    auto address = Address("__ADD_VALID_ADDRESS_HERE__");
-    ASSERT_EQ(address.string(), "__ADD_SAME_VALID_ADDRESS_HERE__");
+    auto address = Address("5H5qKsYuPQPw7s56fa6pbrgpNPKGucX8fkmQdAprouAZqtgz");
+    ASSERT_EQ(address.string(), "5H5qKsYuPQPw7s56fa6pbrgpNPKGucX8fkmQdAprouAZqtgz");
 }
 
 } // namespace TW::Westend::tests

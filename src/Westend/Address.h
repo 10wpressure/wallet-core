@@ -7,32 +7,23 @@
 #pragma once
 
 #include "Data.h"
-#include "PublicKey.h"
+#include "../PublicKey.h"
+#include  "../Polkadot/SS58Address.h"
+#include  <TrustWalletCore/TWSS58AddressType.h>
 
 #include <string>
 
 namespace TW::Westend {
 
-class Address {
-  public:
-    // TODO: Complete class definition
-
+class Address: public SS58Address {
+public:
     /// Determines whether a string makes a valid address.
-    static bool isValid(const std::string& string);
+    static bool isValid(const std::string& string) { return SS58Address::isValid(string, TWSS58AddressTypeWestend); }
 
-    /// Initializes a Westend address with a string representation.
-    explicit Address(const std::string& string);
+    /// Initializes a Kusama address with a string representation.
+    Address(const std::string& string): SS58Address(string, TWSS58AddressTypeWestend) {}
 
-    /// Initializes a Westend address with a public key.
-    explicit Address(const PublicKey& publicKey);
-
-    /// Returns a string representation of the address.
-    std::string string() const;
+    /// Initializes a Kusama address with a public key.
+    Address(const PublicKey& publicKey): SS58Address(publicKey, TWSS58AddressTypeWestend) {}
 };
-
-inline bool operator==(const Address& lhs, const Address& rhs) {
-    // TODO: Complete equality operator
-    return true;
-}
-
 } // namespace TW::Westend

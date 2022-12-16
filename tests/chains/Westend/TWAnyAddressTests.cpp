@@ -4,15 +4,15 @@
 // terms governing use, modification, and redistribution, is contained in the
 // file LICENSE at the root of the source code distribution tree.
 
-#include <TrustWalletCore/TWAnyAddress.h>
 #include "HexCoding.h"
-
+#include "proto/Polkadot.pb.h"
+#include "uint256.h"
 #include "TestUtilities.h"
+#include <TrustWalletCore/TWAnySigner.h>
+
 #include <gtest/gtest.h>
 
-using namespace TW;
-
-// TODO: Finalize tests
+namespace TW::Polkadot::tests {
 
 TEST(TWWestend, Address) {
     // TODO: Finalize test implementation
